@@ -75,19 +75,17 @@ EmberDreamFactoryAdapter.Adapter = DS.RESTAdapter.extend({
 	},
 
 	// Used https://github.com/clintjhill/ember-parse-adapter/blob/master/dist/ember-parse-adapter.js#L290 as a starting point
-	// Currently non-functional
 	updateRecord: function(store, type, record) {
 		var data = {};
 		var serializer = store.serializerFor(type.typeKey);
 		serializer.serializeIntoHash(data, type, record);
-		var id = record.get('id');
 		var adapter = this;
 
 		return new Ember.RSVP.Promise(function(resolve, reject) {
-			adapter.ajax(adapter.buildURL(type.typeKey, id), "PATCH", { data: data }).then(function(json){
+			// hack to make DSP send back the full object
+			adapter.ajax(adapter.buildURL(type.typeKey) + '?fields=*', "PUT", { data: data }).then(function(json){
 				// if the request is a success we'll return the same data we passed in
-				var completed = Ember.merge(data.record, json);
-				resolve(completed);
+				resolve(json);
 			}, function(reason){
 				reject(reason.responseJSON);
 			});
