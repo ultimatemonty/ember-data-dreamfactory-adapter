@@ -17,6 +17,7 @@ App.ModelAdapter = EmberDreamFactoryAdapter.Adapter.extend({
 ##TODO##
 - Relationships
 - PATCH/PUT operations
+- Params for GET operations
 - ???
 
 ##Helping out###
