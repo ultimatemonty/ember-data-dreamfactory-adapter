@@ -14,10 +14,13 @@ App.ModelAdapter = EmberDreamFactoryAdapter.Adapter.extend({
 });
 ```
 
+Then use ED like you normally would.
+
 ##TODO##
 - Relationships
 - PATCH/PUT operations
 - Params for GET operations
+- Stored Procedure support
 - ???
 
 ##Helping out###
