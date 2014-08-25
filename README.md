@@ -1,7 +1,7 @@
 ember-data-dreamfactory-adapter
 ===============================
 
-An Ember-Data adapter for the DreamFactory REST API platform
+An Ember-Data adapter for the [DreamFactory REST API platform] (http://www.dreamfactory.com/)
 
 Currently has very basic support for GET, POST, and DELETE operations. 
 
