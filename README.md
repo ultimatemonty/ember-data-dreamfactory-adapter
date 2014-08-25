@@ -3,7 +3,7 @@ ember-data-dreamfactory-adapter
 
 An Ember-Data adapter for the [DreamFactory REST API platform] (http://www.dreamfactory.com/)
 
-Currently has very basic support for GET, POST, and DELETE operations. 
+Currently has very basic support for GET, POST, PUT and DELETE operations. 
 
 ##USAGE##
 ```
@@ -18,8 +18,7 @@ Then use ED like you normally would.
 
 ##TODO##
 - Relationships
-- PATCH/PUT operations
-- Params for GET operations
+- Params for all operations
 - Stored Procedure support
 - ???
 
