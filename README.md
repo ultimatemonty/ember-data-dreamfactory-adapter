@@ -21,9 +21,15 @@ Then use ED like you normally would.
 return this.store.find('todo');
 ```
 
+Query parameters are currently supported for GET calls only. If you need to utilize just pass them to the `find` method as a hash after the model:
+
+```
+return this.store.find('todo', { 'limit': 10, 'order': 'date desc, name asc', 'filter': 'id in (5,15)' });
+```
+
 ##TODO##
 - Relationships
-- Params for all operations
+- Params for POST/PUT/DELETE operations
 - Stored Procedure support
 - Tests
 - ES6'ify
