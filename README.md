@@ -9,7 +9,7 @@ Currently has very basic support for GET, POST, PUT and DELETE operations.
 To access a REST API located at `http://dsp-my-app.cloud.dreamfactory.com/rest/db/todo` for app `todojquery`
 
 ```
-App.ModelAdapter = EmberDreamFactoryAdapter.Adapter.extend({
+App.TodoAdapter = EmberDreamFactoryAdapter.Adapter.extend({
   host: 'http://dsp-my-app.cloud.dreamfactory.com',
   namespace: 'rest/db',
   applicationName: 'todojquery'
