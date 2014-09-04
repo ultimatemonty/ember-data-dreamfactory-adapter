@@ -52,6 +52,38 @@ EmberDreamFactoryAdapter.Adapter = DS.RESTAdapter.extend({
 		});
 	},
 
+	findQuery: function (store, type, query) {
+		if (typeof query.procedure !== 'undefined') {
+			// A stored procedure was requested. Alter buildUrl to use the correct API path
+			var proc = query.procedure;
+			var data = {};
+			var httpRequestType = 'GET';	// default request to GET
+			var adapter = this;
+
+			// remove the procedure property from the query object
+			delete query.procedure;
+
+			// Test to see if the query has additional properties. If so we need to change the httpRequestType to a HTTP POST
+			if (!this.isEmpty(query)) {				
+				httpRequestType = 'POST';
+			}
+
+			// the serializer expects all results to be wrapped in a 'record' object so we add that here
+			query.wrapper = 'record';
+
+			return new Ember.RSVP.Promise(function(resolve, reject) {
+				adapter.ajax(adapter.buildProcUrl(proc), httpRequestType, { data: query }).then(function(json) {
+					resolve(json);
+				}, function(reason) {
+					reject(reason.responseJSON);
+				});
+			});
+		} else {
+			// normal call so we use the normal findQuery
+			return this._super(store, type, query);
+		}
+	},
+
 	// Used https://github.com/clintjhill/ember-parse-adapter/blob/master/dist/ember-parse-adapter.js#L290 as a starting point
 	createRecord: function(store, type, record) {
 		var data = {};
