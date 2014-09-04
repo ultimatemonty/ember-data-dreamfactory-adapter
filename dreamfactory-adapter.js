@@ -52,10 +52,6 @@ EmberDreamFactoryAdapter.Adapter = DS.RESTAdapter.extend({
 		});
 	},
 
-	pathForType: function (type) {
-		return Ember.String.pluralize(Ember.String.capitalize(Ember.String.camelize(type)));
-	},
-
 	// Used https://github.com/clintjhill/ember-parse-adapter/blob/master/dist/ember-parse-adapter.js#L290 as a starting point
 	createRecord: function(store, type, record) {
 		var data = {};
@@ -90,8 +86,26 @@ EmberDreamFactoryAdapter.Adapter = DS.RESTAdapter.extend({
 				reject(reason.responseJSON);
 			});
 		});
+	}
+
+	pathForType: function (type) {
+		return Ember.String.pluralize(Ember.String.capitalize(Ember.String.camelize(type)));
 	},
 
+	buildProcUrl: function (proc) {
+		var url = [],
+			host = this.get('host'),
+			prefix = this.urlPrefix();
+
+		url.push('_proc');
+		url.push(proc);
+
+		if (prefix) { url.unshift(prefix); }
+
+		url = url.join('/');
+
+		return url;
+	},
 	sessionToken: Ember.computed('headers.X-DreamFactory-Session-Token', function (key, value) {
 		if (arguments.length < 2) {
 			return this.get('headers.X-DreamFactory-Session-Token');
