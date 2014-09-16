@@ -17,7 +17,7 @@ EmberDreamFactoryAdapter.Serializer = DS.RESTSerializer.extend({
 
 	extractSingle: function (store, primaryType, payload, recordId) {
 		var namespacedPayload = {};
-		namespacedPayload[primaryType.typeKey] = payload;
+		namespacedPayload[primaryType.typeKey] = payload.record[0];
 		return this._super(store, primaryType, namespacedPayload, recordId);
 	},
 
